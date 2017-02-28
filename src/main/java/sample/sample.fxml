@@ -50,7 +50,7 @@
                <font>
                   <Font size="27.0" />
                </font></TextArea>
-            <TextField alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0" text="177">
+            <TextField  fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0" text="177">
                <font>
                   <Font size="25.0" />
                </font>

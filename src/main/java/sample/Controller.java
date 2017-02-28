@@ -2,11 +2,12 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Controller {
 
@@ -15,7 +16,7 @@ public class Controller {
     @FXML
     public DatePicker pickStartDate;
     @FXML
-    public DatePicker stainPeriod;
+    public TextField stayPeriod;
     @FXML
     public Button countButton;
     @FXML
@@ -27,12 +28,17 @@ public class Controller {
     @FXML
     public TextArea textArea;
 
+
     private StringBuilder result = new StringBuilder();
 
 
     private DateObject dateObject = new DateObject();
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+    private ReportGenerator reportGenerator = new ReportGenerator();
+
+    private Utils utils = new Utils();
 
     public Controller() {
 
@@ -65,18 +71,18 @@ public class Controller {
 */
 
             String enterDateText = dateObject.getEnterDate().get(dateObject.getEnterDate().size()-1).format(formatter);
-            String exitDateText = dateObject.getExitDate().get(dateObject.getExitDate().size()-1).format(formatter);
+            String exitDateText = dateObject.getExitDate().get(dateObject.getExitDate().size() - 1).format(formatter);
+
 
             result.append(textArea.getText());
             result.append(enterDateText);
             result.append(" ");
             result.append(exitDateText);
             result.append(" ");
-            result.append(daysBetweenDate(enterDateText, exitDateText));
+            result.append(utils.daysBetweenDate(dateObject.getEnterDate().get(dateObject.getEnterDate().size()-1),dateObject.getExitDate().get(dateObject.getExitDate().size() - 1)));
             result.append("\n");
 
-/*1)95 днів перебування 177 - 95 = 92
-* 2)39 днів перебування 92 - 39 = 53*/
+
             textArea.setText(result.toString());
             result.setLength(0);
 
@@ -84,42 +90,19 @@ public class Controller {
             /*add data to table*/
         } else {
             /*count data and make result
+
+            firstly need validation data,fields
+
             * todo at result must be: кількість днів які залишились до кінця візи. Кількість днів які ще можеш перебувати в Польщі. Кількість днів які провів провів вдома коли виїжджав. Кількість днів які провів в Польщі.*/
 
+            dateObject.setStartDate(pickStartDate.getValue());
+            dateObject.setEndDate(pickEndDate.getValue());
+            dateObject.setStayPeriod(Integer.valueOf(stayPeriod.getText()));
 
+            reportGenerator = new ReportGenerator(dateObject);
+            reportGenerator.saveAndOpenResultFile();
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(new Controller().daysBetweenDate("11.01.2017", "19.02.2017"));
-        LocalDate date = LocalDate.now().plusDays(54);
-        System.out.println(date);
-    }
-    private String daysBetweenDate(String sDate1, String sDate2) {
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
-
-        LocalDate date = LocalDate.now();
-        try {
-            date = LocalDate.parse(sDate1, formatter);
-        } catch (Exception e) {
-            System.err.println(sDate1 + " have a bad format");
-            e.printStackTrace();
-        }
-
-        LocalDate date2 = LocalDate.now();
-
-        try {
-            date2 = LocalDate.parse(sDate2, formatter);
-        } catch (Exception e) {
-
-            System.err.println(sDate2 + " have a bad format");
-            e.printStackTrace();
-        }
-
-        long daysBetween = ChronoUnit.DAYS.between(date, date2);
-        return String.valueOf(daysBetween);
-    }
 
 }

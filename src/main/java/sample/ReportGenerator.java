@@ -6,6 +6,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -17,8 +18,17 @@ import java.util.stream.Stream;
  * Time: 16:42.
  * To change this template use File|Setting|Editor|File and Code Templates.
  */
-public class ReportGenerator {
+class ReportGenerator {
+    private Utils utils = new Utils();
+    private DateObject dateObject;
 
+    ReportGenerator() {
+    }
+
+    ReportGenerator(DateObject dateObject) {
+
+        this.dateObject = dateObject;
+    }
 
     private String getPath() {
         String path = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation());
@@ -26,7 +36,7 @@ public class ReportGenerator {
         return path;
     }
 
-    private String readReportFile() {
+    private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
         //read file into stream, try-with-resources
         String path = getPath() + "sample/results/result.html";
@@ -41,24 +51,24 @@ public class ReportGenerator {
     }
 
     private StringBuilder createNewReport() {
-        StringBuilder buffer = new StringBuilder(readReportFile());
+        StringBuilder buffer = new StringBuilder(readDefaultReportFile());
 
         int daysToEndOfWiza = buffer.indexOf("id=\"1\">") + 7;
-        buffer.insert(daysToEndOfWiza, "12");
+        buffer.insert(daysToEndOfWiza, getDaysToEndOfWizaValue());
 
         int daysCanBeAtPoland = buffer.indexOf("id=\"2\">") + 7;
-        buffer.insert(daysCanBeAtPoland, "22");
+        buffer.insert(daysCanBeAtPoland, getDaysCanBeAtPolandValue());
 
         int numberOfDaysAtHome = buffer.indexOf("id=\"3\">") + 7;
-        buffer.insert(numberOfDaysAtHome, "54");
+        buffer.insert(numberOfDaysAtHome, getNumberOfDaysAtHomeValue());
 
         int numberOfDaysAtPoland = buffer.indexOf("id=\"4\">") + 7;
-        buffer.insert(numberOfDaysAtPoland, "99");
+        buffer.insert(numberOfDaysAtPoland, getNumberOfDaysAtPolandValue());
 
         return buffer;
     }
 
-    private void saveAndOpenResultFile() {
+    void saveAndOpenResultFile() {
         List<String> lines = Collections.singletonList(createNewReport().toString());
         String path = getPath() + "\\sample\\results\\myResult.html";
         Path file = Paths.get(path);
@@ -72,4 +82,27 @@ public class ReportGenerator {
         }
     }
 
+
+    private String getNumberOfDaysAtHomeValue() {
+        return "0";
+    }
+
+    private String getDaysToEndOfWizaValue() {
+        String  result = "0";
+
+        LocalDate nowDay = LocalDate.now();
+
+        result = utils.daysBetweenDate(dateObject.getEndDate(),nowDay);
+
+        return result;
+    }
+
+
+    private String getDaysCanBeAtPolandValue() {
+        return "0";
+    }
+
+    private String getNumberOfDaysAtPolandValue() {
+        return "0";
+    }
 }
