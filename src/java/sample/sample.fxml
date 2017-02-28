@@ -28,9 +28,9 @@
 
             <Label layoutX="188.0" layoutY="14.0" prefHeight="57.0" prefWidth="105.0" text="       Період           перебування :" textAlignment="CENTER" wrapText="true" />
 
-            <DatePicker fx:id="pickEndDate" layoutX="35.0" layoutY="21.0" prefHeight="25.0" prefWidth="127.0" />
+            <DatePicker fx:id="pickStartDate" layoutX="35.0" layoutY="21.0" prefHeight="25.0" prefWidth="127.0" />
 
-            <DatePicker fx:id="pickStartDate" layoutX="35.0" layoutY="50.0" prefHeight="25.0" prefWidth="127.0" />
+            <DatePicker fx:id="pickEndDate" layoutX="35.0" layoutY="50.0" prefHeight="25.0" prefWidth="127.0" />
             <Button fx:id="addDataToTable" layoutX="277.0" layoutY="89.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="32.0" text="+" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font name="Bauhaus 93" size="16.0" />
@@ -50,7 +50,7 @@
                <font>
                   <Font size="27.0" />
                </font></TextArea>
-            <TextField  fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0" text="177">
+            <TextField fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0" text="177">
                <font>
                   <Font size="25.0" />
                </font>

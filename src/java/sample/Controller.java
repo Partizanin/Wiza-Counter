@@ -41,6 +41,10 @@ public class Controller {
     private Utils utils = new Utils();
 
     public Controller() {
+        pickEndDate = new DatePicker();
+        pickStartDate = new DatePicker();
+        exitDate = new DatePicker();
+        enterDate = new DatePicker();
 
     }
 
@@ -60,15 +64,6 @@ public class Controller {
 
 
         if (button.getText().equals("+")) {
-/*
-
-            for (int i = 0; i < dateObject.getEnterDate().size(); i++) {
-                String enterDateText = dateObject.getEnterDate().get(i).format(formatter);
-                String exitDateText = dateObject.getExitDate().get(i).format(formatter);
-
-                result.append(enterDateText).append(" ").append(exitDateText).append(" ").append(daysBetweenDate(enterDateText, exitDateText)).append("\n");
-            }
-*/
 
             String enterDateText = dateObject.getEnterDate().get(dateObject.getEnterDate().size()-1).format(formatter);
             String exitDateText = dateObject.getExitDate().get(dateObject.getExitDate().size() - 1).format(formatter);

@@ -92,7 +92,7 @@ class ReportGenerator {
 
         LocalDate nowDay = LocalDate.now();
 
-        result = utils.daysBetweenDate(dateObject.getEndDate(),nowDay);
+        result = utils.daysBetweenDate(nowDay,dateObject.getEndDate());
 
         return result;
     }
