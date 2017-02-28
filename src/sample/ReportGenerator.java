@@ -18,12 +18,7 @@ import java.util.stream.Stream;
  * To change this template use File|Setting|Editor|File and Code Templates.
  */
 public class ReportGenerator {
-    public static void main(String[] args) {
-        ReportGenerator reportGenerator = new ReportGenerator();
-        reportGenerator.saveAndOpenResultFile();
 
-
-    }
 
     private String getPath() {
         String path = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation());
@@ -48,9 +43,18 @@ public class ReportGenerator {
     private StringBuilder createNewReport() {
         StringBuilder buffer = new StringBuilder(readReportFile());
 
-        int i = buffer.indexOf("id=\"1\">") + 7;
-        buffer.insert(i, "123");
-        System.out.println(buffer.toString());
+        int daysToEndOfWiza = buffer.indexOf("id=\"1\">") + 7;
+        buffer.insert(daysToEndOfWiza, "12");
+
+        int daysCanBeAtPoland = buffer.indexOf("id=\"2\">") + 7;
+        buffer.insert(daysCanBeAtPoland, "22");
+
+        int numberOfDaysAtHome = buffer.indexOf("id=\"3\">") + 7;
+        buffer.insert(numberOfDaysAtHome, "54");
+
+        int numberOfDaysAtPoland = buffer.indexOf("id=\"4\">") + 7;
+        buffer.insert(numberOfDaysAtPoland, "99");
+
         return buffer;
     }
 
