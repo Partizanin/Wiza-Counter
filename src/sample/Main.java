@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Дата до кінця візи");
-        primaryStage.setScene(new Scene(root, 439, 450));
+        primaryStage.setScene(new Scene(root, 439, 465));
         primaryStage.show();
     }
 

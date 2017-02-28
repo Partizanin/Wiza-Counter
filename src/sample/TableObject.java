@@ -10,10 +10,10 @@ import javafx.beans.property.SimpleStringProperty;
  * To change this template use File|Setting|Editor|File and Code Templates.
  */
 public class TableObject {
-    private SimpleStringProperty id = new SimpleStringProperty();
-    private SimpleStringProperty enterDate = new SimpleStringProperty();
-    private SimpleStringProperty exitDate = new SimpleStringProperty();
-    private SimpleStringProperty stayPeriod = new SimpleStringProperty();
+    private SimpleStringProperty id;
+    private SimpleStringProperty enterDate;
+    private SimpleStringProperty exitDate;
+    private SimpleStringProperty stayPeriod;
 
     public TableObject() {
     }
@@ -29,8 +29,8 @@ public class TableObject {
         return stayPeriod.get();
     }
 
-    public SimpleStringProperty stayPeriodProperty() {
-        return stayPeriod;
+    public String stayPeriodProperty() {
+        return stayPeriod.get();
     }
 
     public void setStayPeriod(String stayPeriod) {
@@ -41,8 +41,8 @@ public class TableObject {
         return exitDate.get();
     }
 
-    public SimpleStringProperty exitDateProperty() {
-        return exitDate;
+    public String exitDateProperty() {
+        return exitDate.get();
     }
 
     public void setExitDate(String exitDate) {
@@ -53,8 +53,8 @@ public class TableObject {
         return enterDate.get();
     }
 
-    public SimpleStringProperty enterDateProperty() {
-        return enterDate;
+    public String enterDateProperty() {
+        return enterDate.get();
     }
 
     public void setEnterDate(String enterDate) {
@@ -65,8 +65,8 @@ public class TableObject {
         return id.get();
     }
 
-    public SimpleStringProperty idProperty() {
-        return id;
+    public String idProperty() {
+        return id.get();
     }
 
     public void setId(String id) {

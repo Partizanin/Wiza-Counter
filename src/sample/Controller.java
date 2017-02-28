@@ -1,11 +1,8 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,108 +21,80 @@ public class Controller {
     @FXML
     public Button addDataToTable;
     @FXML
-    public TableView<Person> tableView = new TableView<>();
-    @FXML
     public DatePicker enterDate;
     @FXML
     public DatePicker exitDate;
-    private final ObservableList<Person> data =
-            FXCollections.observableArrayList(
-                    new Person("A", "Z", "a@example.com"),
-                    new Person("B", "X", "b@example.com"),
-                    new Person("C", "W", "c@example.com"),
-                    new Person("D", "Y", "d@example.com"),
-                    new Person("E", "V", "e@example.com")
-            );
     @FXML
-    public TableColumn columnNumber;
-    @FXML
-    public TableColumn columnEnterDate;
-    @FXML
-    public TableColumn columnExitDate;
-    @FXML
-    public TableColumn columnPeriod;
+    public TextArea textArea;
+
+    private StringBuilder result = new StringBuilder();
+
+
+    private DateObject dateObject = new DateObject();
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public Controller() {
 
     }
 
-
-    public void tableSort(SortEvent<TableView> tableViewSortEvent) {
-
-    }
-
     public void buttonAction(ActionEvent actionEvent) {
-
-        initializeTable();
-
-//        columnNumber = new TableColumn("№");
-//        columnNumber.setCellValueFactory(new PropertyValueFactory<Person, String>("№"));
-//        columnNumber.setPrefWidth(46);
-//
-//        columnEnterDate = new TableColumn("Last Name");
-//        columnEnterDate.setCellValueFactory(
-//                new PropertyValueFactory<Person, String>("Дата вїзду"));
-//        columnEnterDate.setPrefWidth(153.0);
-//
-//        columnExitDate = new TableColumn("Дата виїзду");
-//        columnExitDate.setMinWidth(9.0);
-//        columnExitDate.setPrefWidth(140);
-//        columnExitDate.setCellValueFactory(
-//                new PropertyValueFactory<Person, String>("Дата виїзду"));
-//
-//        columnPeriod = new TableColumn("Інтервал");
-//        columnExitDate.setPrefWidth(82.0);
-//        columnExitDate.setCellValueFactory(
-//                new PropertyValueFactory<Person, String>("Дата виїзду"));
-//
-//        tableView.setItems(data);
-//        tableView.getColumns().addAll(columnNumber, columnEnterDate, columnExitDate, columnPeriod);
-
 
         Button button = (Button) actionEvent.getSource();
 
         if (enterDate.getValue() != null) {
-            String enterDateText = enterDate.getValue().toString();
+
+            dateObject.getEnterDate().add(enterDate.getValue());
         }
 
         if (exitDate.getValue() != null) {
-            String exitDateText = exitDate.getValue().toString();
+
+            dateObject.getExitDate().add(exitDate.getValue());
         }
 
 
         if (button.getText().equals("+")) {
+/*
 
+            for (int i = 0; i < dateObject.getEnterDate().size(); i++) {
+                String enterDateText = dateObject.getEnterDate().get(i).format(formatter);
+                String exitDateText = dateObject.getExitDate().get(i).format(formatter);
+
+                result.append(enterDateText).append(" ").append(exitDateText).append(" ").append(daysBetweenDate(enterDateText, exitDateText)).append("\n");
+            }
+*/
+
+            String enterDateText = dateObject.getEnterDate().get(dateObject.getEnterDate().size()-1).format(formatter);
+            String exitDateText = dateObject.getExitDate().get(dateObject.getExitDate().size()-1).format(formatter);
+
+            result.append(textArea.getText());
+            result.append(enterDateText);
+            result.append(" ");
+            result.append(exitDateText);
+            result.append(" ");
+            result.append(daysBetweenDate(enterDateText, exitDateText));
+            result.append("\n");
+
+/*1)95 днів перебування 177 - 95 = 92
+* 2)39 днів перебування 92 - 39 = 53*/
+            textArea.setText(result.toString());
+            result.setLength(0);
 
 
             /*add data to table*/
         } else {
-            /*count data and make result*/
+            /*count data and make result
+            * todo at result must be: кількість днів які залишились до кінця візи. Кількість днів які ще можеш перебувати в польщі. Кількість днів які провів провів за кордоном коли виїжджав. Кількість днів які провів тут.*/
+
+
         }
     }
 
-    private void initializeTable() {
-
-
-        TableColumn firstNameCol = new TableColumn("First Name");
-        firstNameCol.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
-
-        TableColumn lastNameCol = new TableColumn("Last Name");
-        lastNameCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("lastName")
-        );
-
-        TableColumn emailCol = new TableColumn("Email");
-        emailCol.setMinWidth(200);
-        emailCol.setCellValueFactory(
-                new PropertyValueFactory<Person, String>("email")
-        );
-
-        tableView.setItems(data);
-        tableView.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
-
+    public static void main(String[] args) {
+        System.out.println(new Controller().daysBetweenDate("11.01.2017", "19.02.2017"));
+        LocalDate date = LocalDate.now().plusDays(54);
+        System.out.println(date);
     }
-
     private String daysBetweenDate(String sDate1, String sDate2) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -150,7 +119,6 @@ public class Controller {
         }
 
         long daysBetween = ChronoUnit.DAYS.between(date, date2);
-        System.out.println(daysBetween);
         return String.valueOf(daysBetween);
     }
 

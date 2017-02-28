@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.beans.property.SimpleStringProperty;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,22 +11,23 @@ import java.util.ArrayList;
  * To change this template use File|Setting|Editor|File and Code Templates.
  */
 public class DateObject {
-    private SimpleStringProperty endDate;
-    private SimpleStringProperty startDate;
-    private SimpleStringProperty stayPeriod;
-    private ArrayList<LocalDate> enterDate;
-    private ArrayList<LocalDate> exitDate;
+    private LocalDate endDate;
+    private LocalDate startDate;
+    private Integer stayPeriod;
+    private ArrayList<LocalDate> enterDate = new ArrayList<>();
+    private ArrayList<LocalDate> exitDate = new ArrayList<>();
+
 
 
     public DateObject() {
     }
 
-    public DateObject(SimpleStringProperty endDate, SimpleStringProperty startDate) {
+    public DateObject(LocalDate endDate, LocalDate startDate) {
         this.endDate = endDate;
         this.startDate = startDate;
     }
 
-    public DateObject(SimpleStringProperty endDate, SimpleStringProperty startDate, SimpleStringProperty stayPeriod, ArrayList<LocalDate> enterDate,
+    public DateObject(LocalDate endDate, LocalDate startDate, Integer stayPeriod, ArrayList<LocalDate> enterDate,
                       ArrayList<LocalDate> exitDate) {
         this.endDate = endDate;
         this.startDate = startDate;
@@ -54,27 +53,27 @@ public class DateObject {
         this.enterDate = enterDate;
     }
 
-    public SimpleStringProperty getStayPeriod() {
+    public Integer getStayPeriod() {
         return stayPeriod;
     }
 
-    public void setStayPeriod(SimpleStringProperty stayPeriod) {
+    public void setStayPeriod(Integer stayPeriod) {
         this.stayPeriod = stayPeriod;
     }
 
-    public SimpleStringProperty getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(SimpleStringProperty startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public SimpleStringProperty getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(SimpleStringProperty endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
