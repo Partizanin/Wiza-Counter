@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -64,6 +65,9 @@ class ReportGenerator {
 
         int numberOfDaysAtPoland = buffer.indexOf("id=\"4\">") + 7;
         buffer.insert(numberOfDaysAtPoland, getNumberOfDaysAtPolandValue());
+
+       int lastDayCanBeAtPoland = buffer.indexOf("id=\"5\">") + 7;
+        buffer.insert(lastDayCanBeAtPoland, getLastDayCanBeAtPoland());
 
         return buffer;
     }
@@ -135,6 +139,15 @@ class ReportGenerator {
         }
 
         result = String.valueOf(tempResult);
+        return result;
+    }
+
+    private String getLastDayCanBeAtPoland(){
+
+        String result = "0";
+
+        result = LocalDate.now().plusDays(Long.parseLong(getDaysCanBeAtPolandValue())).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
         return result;
     }
 }
