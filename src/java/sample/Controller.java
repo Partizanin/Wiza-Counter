@@ -7,6 +7,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Controller {
@@ -36,8 +37,6 @@ public class Controller {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-    private ReportGenerator reportGenerator = new ReportGenerator();
-
     private Utils utils = new Utils();
 
     public Controller() {
@@ -52,30 +51,22 @@ public class Controller {
 
         Button button = (Button) actionEvent.getSource();
 
-        if (enterDate.getValue() != null) {
-
-            dateObject.getEnterDate().add(enterDate.getValue());
-        }
-
-        if (exitDate.getValue() != null) {
-
-            dateObject.getExitDate().add(exitDate.getValue());
-        }
 
 
         if (button.getText().equals("+")) {
+            dateObject.addEnterExitDate(enterDate.getValue(), exitDate.getValue());
 
-            String enterDateText = dateObject.getEnterDate().get(dateObject.getEnterDate().size()-1).format(formatter);
-            String exitDateText = dateObject.getExitDate().get(dateObject.getExitDate().size() - 1).format(formatter);
+            for (LocalDate[] dates : dateObject.getEnterExitDate()) {
+                String date1 = dates[0].format(formatter);
+                String date2 = dates[1].format(formatter);
+                String daysBetweenDates = utils.daysBetweenDate(dates[0], dates[1]);
 
-
-            result.append(textArea.getText());
-            result.append(enterDateText);
-            result.append(" ");
-            result.append(exitDateText);
-            result.append(" ");
-            result.append(utils.daysBetweenDate(dateObject.getEnterDate().get(dateObject.getEnterDate().size()-1),dateObject.getExitDate().get(dateObject.getExitDate().size() - 1)));
-            result.append("\n");
+                result.append(date1);
+                result.append(" ");
+                result.append(date2);
+                result.append(" ");
+                result.append(daysBetweenDates).append("\n");
+            }
 
 
             textArea.setText(result.toString());
@@ -94,7 +85,7 @@ public class Controller {
             dateObject.setEndDate(pickEndDate.getValue());
             dateObject.setStayPeriod(Integer.valueOf(stayPeriod.getText()));
 
-            reportGenerator = new ReportGenerator(dateObject);
+            ReportGenerator reportGenerator = new ReportGenerator(dateObject);
             reportGenerator.saveAndOpenResultFile();
         }
     }

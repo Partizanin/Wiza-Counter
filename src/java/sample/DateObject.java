@@ -14,9 +14,7 @@ public class DateObject {
     private LocalDate endDate;
     private LocalDate startDate;
     private Integer stayPeriod;
-    private ArrayList<LocalDate> enterDate = new ArrayList<>();
-    private ArrayList<LocalDate> exitDate = new ArrayList<>();
-
+    private ArrayList<LocalDate[]> enterExitDate = new ArrayList<>();
 
 
     public DateObject() {
@@ -27,30 +25,10 @@ public class DateObject {
         this.startDate = startDate;
     }
 
-    public DateObject(LocalDate endDate, LocalDate startDate, Integer stayPeriod, ArrayList<LocalDate> enterDate,
-                      ArrayList<LocalDate> exitDate) {
+    public DateObject(LocalDate endDate, LocalDate startDate, Integer stayPeriod) {
         this.endDate = endDate;
         this.startDate = startDate;
         this.stayPeriod = stayPeriod;
-        this.enterDate = enterDate;
-        this.exitDate = exitDate;
-    }
-
-
-    public ArrayList<LocalDate> getExitDate() {
-        return exitDate;
-    }
-
-    public void setExitDate(ArrayList<LocalDate> exitDate) {
-        this.exitDate = exitDate;
-    }
-
-    public ArrayList<LocalDate> getEnterDate() {
-        return enterDate;
-    }
-
-    public void setEnterDate(ArrayList<LocalDate> enterDate) {
-        this.enterDate = enterDate;
     }
 
     public Integer getStayPeriod() {
@@ -77,4 +55,48 @@ public class DateObject {
         this.endDate = endDate;
     }
 
+    public ArrayList<LocalDate[]> getEnterExitDate() {
+        return enterExitDate;
+    }
+
+    public void addEnterExitDate(LocalDate enterDate, LocalDate exitDate) {
+        LocalDate[] dates = new LocalDate[2];
+
+        boolean isExist = true;
+
+
+        for (LocalDate[] localDates : getEnterExitDate()) {
+            if (localDates[0].isEqual(enterDate)) {
+                if (localDates[1].isEqual(exitDate)) {
+                    isExist = false;
+                }
+            }
+        }
+
+
+        if (isExist) {
+            dates[0] = enterDate;
+            dates[1] = exitDate;
+
+
+            getEnterExitDate().add(dates);
+        }
+    }
+
+
+    public LocalDate getEnterDateByIndex(int index) {
+        LocalDate result;
+
+        result = getEnterExitDate().get(index)[0];
+
+        return result;
+    }
+
+    public LocalDate getExitDateByIndex(int index) {
+        LocalDate result;
+
+        result = getEnterExitDate().get(index)[1];
+
+        return result;
+    }
 }

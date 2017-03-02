@@ -70,7 +70,7 @@ class ReportGenerator {
 
     void saveAndOpenResultFile() {
         List<String> lines = Collections.singletonList(createNewReport().toString());
-        String path = getPath() + "\\sample\\results\\myResult.html";
+        String path = getPath() + "/sample/results/myResult.html";
         Path file = Paths.get(path);
         System.out.println(path);
 
@@ -82,27 +82,59 @@ class ReportGenerator {
         }
     }
 
-
     private String getNumberOfDaysAtHomeValue() {
-        return "0";
+        String result = "0";
+        int tempResult = 0;
+
+        if (dateObject.getEnterExitDate().size() > 1) {
+
+            for (int i = 0; i < dateObject.getEnterExitDate().size() - 1; i++) {
+                LocalDate exitDateToHome = dateObject.getEnterExitDate().get(i)[1];
+                LocalDate enterDateToPolandAfterHome = dateObject.getEnterExitDate().get(i + 1)[1];
+
+                tempResult += Integer.parseInt(utils.daysBetweenDate(exitDateToHome, enterDateToPolandAfterHome));
+
+            }
+
+        } else if (dateObject.getEnterExitDate().size() == 1) {
+
+            LocalDate exitDateToHome = dateObject.getEnterExitDate().get(0)[1];
+
+            tempResult = Integer.parseInt(utils.daysBetweenDate(exitDateToHome, LocalDate.now()));
+        }
+
+        result = String.valueOf(tempResult);
+        return result;
     }
 
     private String getDaysToEndOfWizaValue() {
-        String  result = "0";
+        String result = "0";
 
-        LocalDate nowDay = LocalDate.now();
-
-        result = utils.daysBetweenDate(nowDay,dateObject.getEndDate());
+        result = utils.daysBetweenDate(LocalDate.now(), dateObject.getEndDate());
 
         return result;
     }
 
-
     private String getDaysCanBeAtPolandValue() {
-        return "0";
+        String result = "";
+
+        result = String.valueOf(dateObject.getStayPeriod() - Integer.parseInt(getNumberOfDaysAtPolandValue()));
+
+        return result;
     }
 
     private String getNumberOfDaysAtPolandValue() {
-        return "0";
+        String result = "";
+        int tempResult = 0;
+
+        for (int i = 0; i < dateObject.getEnterExitDate().size(); i++) {
+            LocalDate enterDate = dateObject.getEnterExitDate().get(i)[0];
+            LocalDate exitDate = dateObject.getEnterExitDate().get(i)[1];
+
+            tempResult += Integer.parseInt(utils.daysBetweenDate(enterDate, exitDate));
+        }
+
+        result = String.valueOf(tempResult);
+        return result;
     }
 }
