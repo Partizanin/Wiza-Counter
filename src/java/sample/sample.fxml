@@ -35,7 +35,7 @@
                <font>
                   <Font name="Bauhaus 93" size="16.0" />
                </font></Button>
-            <Label layoutX="22.0" layoutY="94.0" text="Дата вїзду: " />
+            <Label layoutX="22.0" layoutY="94.0" text="Дата в'їзду: " />
             <Label layoutX="22.0" layoutY="123.0" text="Дата виїзду: " />
             <Separator layoutY="81.0" prefHeight="11.0" prefWidth="431.0" />
             <Separator layoutY="161.0" prefHeight="1.0" prefWidth="431.0" />
@@ -50,7 +50,7 @@
                <font>
                   <Font size="27.0" />
                </font></TextArea>
-            <TextField fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0" text="177">
+            <TextField fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0">
                <font>
                   <Font size="25.0" />
                </font>

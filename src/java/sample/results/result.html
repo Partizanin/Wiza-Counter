@@ -7,7 +7,7 @@
 <body>
 
 <div>
-    <table style="width: 100%">
+    <table style="width: 100%" id="resultTable">
         <tr>
             <th>Назва</th>
             <th>Значення</th>
@@ -37,28 +37,40 @@
         </tr>
     </table>
 
-    <table class="row2" id="enterExitDateTable">
+
+    <table style="float: left;" class="row2" id="wizaDataTable">
         <tr>
-            <th>Дата в'їзду</th>
-            <th>Дата вїзду</th>
+
             <th>Віза від</th>
             <th>Віза до</th>
             <th>Кількість днів</th>
         </tr>
         <tr>
-            <td>0000</td>
-            <td>0000</td>
             <td id="6"></td>
             <td id="7"></td>
             <td id="8"></td>
         </tr>
     </table>
 
+    <table  style="display: inline-block;" class="row2" id="enterExitDataTable">
+        <tr>
+            <th>Дата в'їзду</th>
+            <th>Дата вїзду</th>
+        </tr>
+        <tr id="9">
+
+        </tr>
+    </table>
+
+
 </div>
 </body>
 <style>
-    #enterExitDateTable {
-        margin-top: 5px;
+    #resultTable{
+        margin-bottom: 12px;
+    }
+    #enterExitDataTable {
+        margin-left: 100px;
     }
 
     body {
@@ -72,7 +84,7 @@
     div {
         background-color: white;
         width: 50%;
-        height: 200px;
+        height: auto;
 
         position: absolute; /*it can be fixed too*/
         left: 0;

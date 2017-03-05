@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 class ReportGenerator {
     private Utils utils = new Utils();
     private DateObject dateObject;
-
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     ReportGenerator() {
     }
 
@@ -77,6 +77,10 @@ class ReportGenerator {
 
        int period = buffer.indexOf("id=\"8\">") + 7;
         buffer.insert(period, dateObject.getStayPeriod());
+
+        int enterExitDate = buffer.indexOf("id=\"9\">") + 7;
+        String result = getEnterExitDateReport();
+        buffer.insert(enterExitDate, result);
 
         return buffer;
     }
@@ -155,8 +159,22 @@ class ReportGenerator {
 
         String result = "0";
 
-        result = LocalDate.now().plusDays(Long.parseLong(getDaysCanBeAtPolandValue())).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        result = LocalDate.now().plusDays(Long.parseLong(getDaysCanBeAtPolandValue())).format(formatter);
 
         return result;
+    }
+
+    private String getEnterExitDateReport() {
+        StringBuilder sb = new StringBuilder("");
+
+        for (LocalDate[] dates : dateObject.getEnterExitDate()) {
+            LocalDate enterDate = dates[0];
+            LocalDate exitDate = dates[1];
+            sb.append("<td>").append(enterDate.format(formatter)).append("</td>");
+            sb.append("<td>").append(exitDate.format(formatter)).append("</td>");
+            sb.append("<tr></tr>");
+        }
+
+        return sb.toString();
     }
 }
