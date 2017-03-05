@@ -69,6 +69,15 @@ class ReportGenerator {
        int lastDayCanBeAtPoland = buffer.indexOf("id=\"5\">") + 7;
         buffer.insert(lastDayCanBeAtPoland, getLastDayCanBeAtPoland());
 
+       int wizaFromDate = buffer.indexOf("id=\"6\">") + 7;
+        buffer.insert(wizaFromDate, dateObject.getStartDate());
+
+       int wizaToDate= buffer.indexOf("id=\"7\">") + 7;
+        buffer.insert(wizaToDate, dateObject.getEndDate());
+
+       int period = buffer.indexOf("id=\"8\">") + 7;
+        buffer.insert(period, dateObject.getStayPeriod());
+
         return buffer;
     }
 
