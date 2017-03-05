@@ -52,7 +52,6 @@ public class Controller {
         Button button = (Button) actionEvent.getSource();
 
 
-
         if (button.getText().equals("+")) {
             dateObject.addEnterExitDate(enterDate.getValue(), exitDate.getValue());
 
@@ -73,13 +72,8 @@ public class Controller {
             result.setLength(0);
 
 
-            /*add data to table*/
         } else {
-            /*count data and make result
 
-            firstly need validation data,fields
-
-            * todo at result must be: кількість днів які залишились до кінця візи. Кількість днів які ще можеш перебувати в Польщі. Кількість днів які провів провів вдома коли виїжджав. Кількість днів які провів в Польщі.*/
 
             dateObject.setStartDate(pickStartDate.getValue());
             dateObject.setEndDate(pickEndDate.getValue());

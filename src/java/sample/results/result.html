@@ -5,6 +5,7 @@
     <title>Result</title>
 </head>
 <body>
+
 <div>
     <table style="width: 100%">
         <tr>
@@ -36,34 +37,76 @@
         </tr>
     </table>
 
+    <!--<div id="wizaFromDate">-->
+        <!--<p>Віза від</p>-->
+        <!--<p>12.08.2016</p>-->
+    <!--</div>-->
+
+    <!--<div id="wizaToDate">-->
+        <!--<p>Віза до</p>-->
+        <!--<p>11.02.2017</p>-->
+    <!--</div>-->
+    <!--<div id="wizaPeriod">-->
+        <!--<p>Кількість днів</p>-->
+        <!--<p>177</p>-->
+    <!--</div>-->
+    <table  class="row2" id="enterExitDateTable">
+        <tr>
+            <th>Дата в'їзду</th>
+            <th>Дата вїзду</th>
+            <th>Віза від</th>
+            <th>Віза до</th>
+            <th>Кількість днів</th>
+        </tr>
+        <tr>
+            <td>21.01.2017</td>
+            <td>32.02.2016</td>
+            <td>12.08.2016</td>
+            <td>11.02.2017</td>
+            <td>177</td>
+        </tr>
+    </table>
+
 </div>
 </body>
 <style>
-    body{
+#enterExitDateTable{
+    margin-top: 5px;
+}
+
+    body {
         background-image: url("https://ocdn.eu/pulscms-transforms/1/8ppktkpTURBXy9mNzI2NjQ5Zjg2OTcyNGM4OTZhMWFhODY4MzdiZWJlYi5qcGeSlQMAAM0Goc0DupMFzQMgzQHC");
     }
+
     .row2 {
-        text-align:center;
+        text-align: center;
     }
-    div{
+
+    div {
         background-color: white;
         width: 50%;
-        height: 50%;
+        height: 200px;
 
-        position:absolute; /*it can be fixed too*/
-        left:0; right:0;
-        top:0; bottom:0;
-        margin:auto;
+        position: absolute; /*it can be fixed too*/
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
 
         /*this to solve "the content will not be cut when the window is smaller than the content": */
-        max-width:100%;
-        max-height:100%;
-        overflow:auto;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
     }
+
     th {
         background-color: #4CAF50;
         color: white;
     }
-    tr:nth-child(even) {background-color: #f2f2f2}
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
 </style>
 </html>
