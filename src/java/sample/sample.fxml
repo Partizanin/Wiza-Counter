@@ -28,36 +28,28 @@
 
             <Label layoutX="188.0" layoutY="14.0" prefHeight="57.0" prefWidth="105.0" text="       Період           перебування :" textAlignment="CENTER" wrapText="true" />
 
-            <DatePicker fx:id="pickStartDate" layoutX="35.0" layoutY="21.0" prefHeight="25.0" prefWidth="127.0" />
+            <DatePicker fx:id="pickStartDate" layoutX="35.0" layoutY="21.0" prefHeight="25.0" prefWidth="127.0" promptText="25.12.2016" />
 
-            <DatePicker fx:id="pickEndDate" layoutX="35.0" layoutY="50.0" prefHeight="25.0" prefWidth="127.0" />
-            <Button fx:id="addDataToTable" layoutX="277.0" layoutY="89.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="32.0" text="+" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font name="Bauhaus 93" size="16.0" />
-               </font></Button>
-            <Label layoutX="22.0" layoutY="94.0" text="Дата в'їзду: " />
-            <Label layoutX="22.0" layoutY="123.0" text="Дата виїзду: " />
-            <Separator layoutY="81.0" prefHeight="11.0" prefWidth="431.0" />
-            <Separator layoutY="161.0" prefHeight="1.0" prefWidth="431.0" />
-            <DatePicker fx:id="enterDate" layoutX="90.0" layoutY="90.0" />
-            <DatePicker fx:id="exitDate" layoutX="90.0" layoutY="119.0" />
-            <Button fx:id="countButton" layoutX="84.0" layoutY="413.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="112.0" text="Порахувати" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-               <font>
-                  <Font name="Algerian" size="16.0" />
-               </font>
-            </Button>
-            <TextArea fx:id="textArea" layoutX="4.0" layoutY="169.0" prefHeight="215.0" prefWidth="424.0">
-               <font>
-                  <Font size="27.0" />
-               </font></TextArea>
-            <TextField fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0">
+            <DatePicker fx:id="pickEndDate" layoutX="35.0" layoutY="50.0" prefHeight="25.0" prefWidth="127.0" promptText="25.12.2016" />
+            <TextField fx:id="stayPeriod" alignment="CENTER" layoutX="293.0" layoutY="15.0" prefHeight="57.0" prefWidth="105.0" promptText="177">
                <font>
                   <Font size="25.0" />
                </font>
             </TextField>
+            <DatePicker fx:id="enterDate" layoutX="90.0" layoutY="90.0" promptText="25.12.2016" />
+            <DatePicker fx:id="exitDate" layoutX="90.0" layoutY="119.0" promptText="25.12.2016" />
+            <Button fx:id="addDataToTable" layoutX="277.0" layoutY="89.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="32.0" text="+" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Bauhaus 93" size="16.0" />
+               </font></Button>
             <Button fx:id="addDataToTable1" layoutX="312.0" layoutY="89.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="32.0" text="—" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
                <font>
                   <Font name="Bauhaus 93" size="11.0" />
+               </font>
+            </Button>
+            <Button fx:id="countButton" layoutX="84.0" layoutY="413.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="112.0" text="Порахувати" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="Algerian" size="16.0" />
                </font>
             </Button>
             <Button fx:id="cleanUp" layoutX="235.0" layoutY="414.0" mnemonicParsing="false" onAction="#buttonAction" prefHeight="57.0" prefWidth="120.0" text="Очистити все" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
@@ -65,6 +57,14 @@
                   <Font name="Algerian" size="16.0" />
                </font>
             </Button>
+            <Label layoutX="22.0" layoutY="94.0" text="Дата в'їзду: " />
+            <Label layoutX="22.0" layoutY="123.0" text="Дата виїзду: " />
+            <Separator layoutY="81.0" prefHeight="11.0" prefWidth="431.0" />
+            <Separator layoutY="161.0" prefHeight="1.0" prefWidth="431.0" />
+            <TextArea fx:id="textArea" editable="false" layoutX="4.0" layoutY="169.0" prefHeight="215.0" prefWidth="424.0">
+               <font>
+                  <Font size="27.0" />
+               </font></TextArea>
          </children></AnchorPane>
    </children>
 </GridPane>
