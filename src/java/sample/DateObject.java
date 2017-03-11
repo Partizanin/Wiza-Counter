@@ -1,5 +1,6 @@
 package sample;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -31,35 +32,35 @@ public class DateObject {
         this.stayPeriod = stayPeriod;
     }
 
-    public Integer getStayPeriod() {
+    Integer getStayPeriod() {
         return stayPeriod;
     }
 
-    public void setStayPeriod(Integer stayPeriod) {
+    void setStayPeriod(Integer stayPeriod) {
         this.stayPeriod = stayPeriod;
     }
 
-    public LocalDate getStartDate() {
+    LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
-    public ArrayList<LocalDate[]> getEnterExitDate() {
+    ArrayList<LocalDate[]> getEnterExitDate() {
         return enterExitDate;
     }
 
-    public void addEnterExitDate(LocalDate enterDate, LocalDate exitDate) {
+    void addEnterExitDate(LocalDate enterDate, LocalDate exitDate) {
         LocalDate[] dates = new LocalDate[2];
 
         boolean isExist = true;
@@ -97,6 +98,23 @@ public class DateObject {
 
         result = getEnterExitDate().get(index)[1];
 
+        return result;
+    }
+
+    boolean isHaveNotNullFiled(DateObject dateObject) {
+        boolean result = true;
+        for (Field field : dateObject.getClass().getFields()) {
+
+            field.setAccessible(true);
+            try {
+                if (field.get(dateObject) == null) {
+                    result = false;
+                    break;
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
         return result;
     }
 }

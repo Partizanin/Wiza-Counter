@@ -54,36 +54,50 @@ public class Controller {
 
 
         if (button.getText().equals("+")) {
+            String enterDateValidationResult = utils.dateValidation(enterDate.getEditor().getText());
+            String exitDateValidationResult = utils.dateValidation(exitDate.getEditor().getText());
 
-            enterDate.setValue(enterDate.getConverter().fromString(enterDate.getEditor().getText()));
-            exitDate.setValue(exitDate.getConverter().fromString(exitDate.getEditor().getText()));
+            if (!enterDateValidationResult.equals("x") && !exitDateValidationResult.equals("x")) {
 
-            dateObject.addEnterExitDate(enterDate.getValue(), exitDate.getValue());
+                enterDate.setValue(enterDate.getConverter().fromString(enterDateValidationResult));
+                exitDate.setValue(exitDate.getConverter().fromString(exitDateValidationResult));
 
-            updateTextArea();
+                dateObject.addEnterExitDate(enterDate.getValue(), exitDate.getValue());
+
+                updateTextArea();
+            } else {
+                System.out.println("enter date or exit date is not valid");
+            }
 
 
         } else if (button.getText().equals("—")) {
-            enterDate.setValue(enterDate.getConverter().fromString(enterDate.getEditor().getText()));
-            exitDate.setValue(exitDate.getConverter().fromString(exitDate.getEditor().getText()));
+            String enterDateValidationResult = utils.dateValidation(enterDate.getEditor().getText());
+            String exitDateValidationResult = utils.dateValidation(exitDate.getEditor().getText());
 
-            LocalDate enterDateValue = enterDate.getValue();
-            LocalDate exitDateValue = exitDate.getValue();
+            if (!enterDateValidationResult.equals("x") && !exitDateValidationResult.equals("x")) {
+                enterDate.setValue(enterDate.getConverter().fromString(enterDate.getEditor().getText()));
+                exitDate.setValue(exitDate.getConverter().fromString(exitDate.getEditor().getText()));
 
-            for (int i = 0; i < dateObject.getEnterExitDate().size(); i++) {
-                LocalDate[] dates = dateObject.getEnterExitDate().get(i);
-                LocalDate enterDate = dates[0];
-                LocalDate exitDate = dates[1];
+                LocalDate enterDateValue = enterDate.getValue();
+                LocalDate exitDateValue = exitDate.getValue();
 
-                if (enterDate.isEqual(enterDateValue)) {
+                for (int i = 0; i < dateObject.getEnterExitDate().size(); i++) {
+                    LocalDate[] dates = dateObject.getEnterExitDate().get(i);
+                    LocalDate enterDate = dates[0];
+                    LocalDate exitDate = dates[1];
 
-                    if (exitDate.isEqual(exitDateValue)) {
-                        dateObject.getEnterExitDate().remove(i);
-                        updateTextArea();
-                        break;
+                    if (enterDate.isEqual(enterDateValue)) {
+
+                        if (exitDate.isEqual(exitDateValue)) {
+                            dateObject.getEnterExitDate().remove(i);
+                            updateTextArea();
+                            break;
+                        }
                     }
-                }
 
+                }
+            } else {
+                System.out.println("enter date or exit date is not valid");
             }
 
         } else if (button.getText().equals("Очистити все")) {
@@ -95,16 +109,32 @@ public class Controller {
             exitDate.getEditor().setText("");
             dateObject = new DateObject();
         } else {
+            String endDateValidationResult = utils.dateValidation(pickEndDate.getEditor().getText());
+            String startDateValidationResult = utils.dateValidation(pickStartDate.getEditor().getText());
 
-            pickEndDate.setValue(pickEndDate.getConverter().fromString(pickEndDate.getEditor().getText()));
-            pickStartDate.setValue(pickStartDate.getConverter().fromString(pickStartDate.getEditor().getText()));
 
-            dateObject.setStartDate(pickStartDate.getValue());
-            dateObject.setEndDate(pickEndDate.getValue());
-            dateObject.setStayPeriod(Integer.valueOf(stayPeriod.getText()));
+            if (!endDateValidationResult.equals("x") && !startDateValidationResult.equals("x")) {
+                pickEndDate.setValue(pickEndDate.getConverter().fromString(endDateValidationResult));
+                pickStartDate.setValue(pickStartDate.getConverter().fromString(startDateValidationResult));
 
-            ReportGenerator reportGenerator = new ReportGenerator(dateObject);
-            reportGenerator.saveAndOpenResultFile();
+                dateObject.setStartDate(pickStartDate.getValue());
+                dateObject.setEndDate(pickEndDate.getValue());
+
+                if (!utils.numberValidation(stayPeriod.getText()).equals("x")) {
+                    dateObject.setStayPeriod(Integer.valueOf(stayPeriod.getText()));
+
+                    if (dateObject.isHaveNotNullFiled(dateObject)) {
+                        ReportGenerator reportGenerator = new ReportGenerator(dateObject);
+                        reportGenerator.saveAndOpenResultFile();
+                    }
+
+                }else {
+                    System.out.println("stay period filed is ont valid");
+                }
+
+            }else {
+                System.out.println("start date or end date is not valid");
+            }
         }
     }
 
