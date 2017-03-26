@@ -2,22 +2,25 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     public DatePicker pickEndDate;
     @FXML
     public DatePicker pickStartDate;
     @FXML
-    public TextField stayPeriod;
+    public TextField stayPeriod = new TextField();
     @FXML
     public Button countButton;
     @FXML
@@ -28,6 +31,7 @@ public class Controller {
     public DatePicker exitDate;
     @FXML
     public TextArea textArea;
+    @FXML
     public Button cleanUp;
 
 
@@ -41,11 +45,6 @@ public class Controller {
     private Utils utils = new Utils();
 
     public Controller() {
-        pickEndDate = new DatePicker();
-        pickStartDate = new DatePicker();
-        exitDate = new DatePicker();
-        enterDate = new DatePicker();
-
     }
 
     public void buttonAction(ActionEvent actionEvent) {
@@ -128,11 +127,11 @@ public class Controller {
                         reportGenerator.saveAndOpenResultFile();
                     }
 
-                }else {
+                } else {
                     System.out.println("stay period filed is ont valid");
                 }
 
-            }else {
+            } else {
                 System.out.println("start date or end date is not valid");
             }
         }
@@ -157,4 +156,31 @@ public class Controller {
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        pickEndDate.setValue(LocalDate.parse("11.10.2017",formatter));
+        pickStartDate.setValue(LocalDate.parse("18.10.2016",formatter));
+        stayPeriod.setText("177");
+
+        enterDate.setValue(LocalDate.parse("24.01.2017", formatter));
+        exitDate.setValue(LocalDate.now());
+
+
+
+        LocalDate[] dates = new LocalDate[2];
+
+        dates[0] = LocalDate.parse("21.10.2016", formatter);
+        dates[1] = LocalDate.parse("11.01.2017", formatter);
+
+        dateObject.getEnterExitDate().add(dates);
+
+
+        dates = new LocalDate[2];
+        dates[0] = LocalDate.parse("24.01.2017", formatter);
+        dates[1] = LocalDate.now();
+
+        dateObject.getEnterExitDate().add(dates);
+        updateTextArea();
+
+    }
 }

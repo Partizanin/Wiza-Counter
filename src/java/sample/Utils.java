@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Utils {
     public String daysBetweenDate(LocalDate startDate, LocalDate endDate) {
-//        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
-//        return String.valueOf(daysBetween);
         long days = Duration.between(startDate.atTime(0, 0), endDate.atTime(0, 0)).toDays();
         return String.valueOf(days);
     }
