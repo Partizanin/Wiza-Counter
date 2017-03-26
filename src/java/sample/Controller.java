@@ -1,12 +1,11 @@
 package sample;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -44,7 +43,34 @@ public class Controller implements Initializable {
 
     private Utils utils = new Utils();
 
+    private Tooltip infoTt = new Tooltip();
+    private Tooltip errorTt = new Tooltip();
+    private PauseTransition delayError = new PauseTransition(Duration.seconds(3));
+    private PauseTransition delayInfoTt = new PauseTransition(Duration.seconds(3));
+
     public Controller() {
+        infoTt.setAutoHide(true);
+        infoTt.getStyleClass().add("tooltipInfo");
+        delayInfoTt.setOnFinished(event -> infoTt.hide());
+
+        errorTt.setAutoHide(true);
+        errorTt.getStyleClass().add("tooltipError");
+        delayError.setOnFinished(event -> errorTt.hide());
+
+    }
+
+    private void showErrorMessage(String value) {
+        errorTt.setText(value);
+        errorTt.show(textArea,0,0);
+        errorTt.centerOnScreen();
+        delayError.play();
+    }
+
+    private void showInfoMessage(String stringValue) {
+        infoTt.setText(stringValue);
+        infoTt.show(textArea, 0, 0);
+        infoTt.centerOnScreen();
+        delayInfoTt.play();
     }
 
     public void buttonAction(ActionEvent actionEvent) {
@@ -56,18 +82,36 @@ public class Controller implements Initializable {
             String enterDateValidationResult = utils.dateValidation(enterDate.getEditor().getText());
             String exitDateValidationResult = utils.dateValidation(exitDate.getEditor().getText());
 
-            if (!enterDateValidationResult.equals("x") && !exitDateValidationResult.equals("x")) {
+            if (!enterDateValidationResult.equals("x")) {
+
+                if (enterDate.getStyleClass().size() > 0) {
+                    enterDate.getStyleClass().remove("date");
+                }
 
                 enterDate.setValue(enterDate.getConverter().fromString(enterDateValidationResult));
-                exitDate.setValue(exitDate.getConverter().fromString(exitDateValidationResult));
 
-                dateObject.addEnterExitDate(enterDate.getValue(), exitDate.getValue());
-
-                updateTextArea();
             } else {
+                enterDate.getStyleClass().add("date");
+                showErrorMessage("Дата в'їзду введене не корректно!");
                 System.out.println("enter date or exit date is not valid");
             }
 
+            if (!exitDateValidationResult.equals("x")) {
+
+                if (exitDate.getStyleClass().size() > 0) {
+                    exitDate.getStyleClass().remove("date");
+                }
+
+                exitDate.setValue(exitDate.getConverter().fromString(exitDateValidationResult));
+                dateObject.addEnterExitDate(enterDate.getValue(), exitDate.getValue());
+                updateTextArea();
+
+            } else {
+                exitDate.getStyleClass().add("date");
+
+                showErrorMessage("Дату виїзду введене не корректно!");
+
+            }
 
         } else if (button.getText().equals("—")) {
             String enterDateValidationResult = utils.dateValidation(enterDate.getEditor().getText());
@@ -96,6 +140,7 @@ public class Controller implements Initializable {
 
                 }
             } else {
+                showErrorMessage("enter date or exit date is not valid");
                 System.out.println("enter date or exit date is not valid");
             }
 
@@ -107,6 +152,7 @@ public class Controller implements Initializable {
             enterDate.getEditor().setText("");
             exitDate.getEditor().setText("");
             dateObject = new DateObject();
+            showInfoMessage("Все очищено!");
         } else {
             String endDateValidationResult = utils.dateValidation(pickEndDate.getEditor().getText());
             String startDateValidationResult = utils.dateValidation(pickStartDate.getEditor().getText());
@@ -128,10 +174,12 @@ public class Controller implements Initializable {
                     }
 
                 } else {
+                    showErrorMessage("stay period filed is ont valid");
                     System.out.println("stay period filed is ont valid");
                 }
 
             } else {
+                showErrorMessage("start date or end date is not valid");
                 System.out.println("start date or end date is not valid");
             }
         }
