@@ -8,6 +8,6 @@
     -fx-font-size: 13px;
     -fx-font-weight: bold;
 }
-.date {
+.redBorder {
     -fx-border-color: red;
 }

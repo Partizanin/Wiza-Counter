@@ -60,9 +60,9 @@ public class DateObject {
         return enterExitDate;
     }
 
-    void addEnterExitDate(LocalDate enterDate, LocalDate exitDate) {
+    String addEnterExitDate(LocalDate enterDate, LocalDate exitDate) {
         LocalDate[] dates = new LocalDate[2];
-
+        String result = "Такі дати вже існують";
         boolean isExist = true;
 
 
@@ -81,7 +81,10 @@ public class DateObject {
 
 
             getEnterExitDate().add(dates);
+            result = "Дати успішно додано!";
         }
+
+        return result;
     }
 
 
