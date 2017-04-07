@@ -40,7 +40,7 @@ class ReportGenerator {
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
         //read file into stream, try-with-resources
-        String path = getPath() + "sample/results/result.html";
+        String path = getPath() + "/sample/results/result.html";
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
 
             stream.forEach(buffer::append);
@@ -89,7 +89,6 @@ class ReportGenerator {
         List<String> lines = Collections.singletonList(createNewReport().toString());
         String path = getPath() + "/sample/results/myResult.html";
         Path file = Paths.get(path);
-        System.out.println(path);
 
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
