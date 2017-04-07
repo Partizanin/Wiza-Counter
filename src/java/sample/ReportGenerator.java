@@ -1,7 +1,7 @@
 package sample;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * Created with Intellij IDEA.
@@ -23,6 +22,7 @@ class ReportGenerator {
     private Utils utils = new Utils();
     private DateObject dateObject;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     ReportGenerator() {
     }
 
@@ -34,20 +34,49 @@ class ReportGenerator {
     private String getPath() {
         String path = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation());
         path = path.substring(6);
+        System.out.println("getPath() " + path);
         return path;
+    }
+
+    public static void main(String[] args) {
+        new ReportGenerator(new DateObject()).readDefaultReportFile();
+
     }
 
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
         //read file into stream, try-with-resources
         String path = getPath() + "/sample/results/result.html";
-        try (Stream<String> stream = Files.lines(Paths.get(path))) {
+        String path3 = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation()) + "result.html";
 
-            stream.forEach(buffer::append);
+
+        System.out.println("!!!!!!!!!!!! " + path3 + " !!!!!!!!!");
+/*java -jar DTC.jar*/
+
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(path), "UTF8"));
+        } catch (UnsupportedEncodingException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String str;
+
+        try {
+            assert in != null;
+            while ((str = in.readLine()) != null) {
+
+                buffer.append(str);
+            }
+            in.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         return buffer.toString();
     }
 
@@ -66,16 +95,16 @@ class ReportGenerator {
         int numberOfDaysAtPoland = buffer.indexOf("id=\"4\">") + 7;
         buffer.insert(numberOfDaysAtPoland, getNumberOfDaysAtPolandValue());
 
-       int lastDayCanBeAtPoland = buffer.indexOf("id=\"5\">") + 7;
+        int lastDayCanBeAtPoland = buffer.indexOf("id=\"5\">") + 7;
         buffer.insert(lastDayCanBeAtPoland, getLastDayCanBeAtPoland());
 
-       int wizaFromDate = buffer.indexOf("id=\"6\">") + 7;
+        int wizaFromDate = buffer.indexOf("id=\"6\">") + 7;
         buffer.insert(wizaFromDate, dateObject.getStartDate());
 
-       int wizaToDate= buffer.indexOf("id=\"7\">") + 7;
+        int wizaToDate = buffer.indexOf("id=\"7\">") + 7;
         buffer.insert(wizaToDate, dateObject.getEndDate());
 
-       int period = buffer.indexOf("id=\"8\">") + 7;
+        int period = buffer.indexOf("id=\"8\">") + 7;
         buffer.insert(period, dateObject.getStayPeriod());
 
         int enterExitDate = buffer.indexOf("id=\"9\">") + 7;
@@ -154,7 +183,7 @@ class ReportGenerator {
         return result;
     }
 
-    private String getLastDayCanBeAtPoland(){
+    private String getLastDayCanBeAtPoland() {
 
         String result = "0";
 
