@@ -34,23 +34,16 @@ class ReportGenerator {
     private String getPath() {
         String path = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation());
         path = path.substring(6);
-        System.out.println("getPath() " + path);
+
+        int indexOf1 = path.lastIndexOf("/") + 1;
+        path = path.substring(0, indexOf1);
         return path;
-    }
-
-    public static void main(String[] args) {
-        new ReportGenerator(new DateObject()).readDefaultReportFile();
-
     }
 
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
         //read file into stream, try-with-resources
-        String path = getPath() ;
-        String path3 = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation()) + "result.html";
-
-
-        System.out.println("!!!!!!!!!!!! " + path3 + " !!!!!!!!!");
+        String path = getPath()+ "result.html";
 /*java -jar DTC.jar*/
 
         BufferedReader in = null;
@@ -116,7 +109,7 @@ class ReportGenerator {
 
     void saveAndOpenResultFile() {
         List<String> lines = Collections.singletonList(createNewReport().toString());
-        String path = getPath() + "/sample/results/myResult.html";
+        String path = getPath() + "myResult.html";
         Path file = Paths.get(path);
 
         try {
