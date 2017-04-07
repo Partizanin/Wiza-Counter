@@ -46,7 +46,7 @@ class ReportGenerator {
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
         //read file into stream, try-with-resources
-        String path = getPath() + "/sample/results/result.html";
+        String path = getPath() ;
         String path3 = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation()) + "result.html";
 
 
