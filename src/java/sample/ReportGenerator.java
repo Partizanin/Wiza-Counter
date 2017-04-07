@@ -43,7 +43,7 @@ class ReportGenerator {
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
         //read file into stream, try-with-resources
-        String path = getPath()+ "result.html";
+        String path = getPath()+ "resources/result.html";
 /*java -jar DTC.jar*/
 
         BufferedReader in = null;
