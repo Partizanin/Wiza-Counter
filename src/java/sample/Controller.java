@@ -3,16 +3,13 @@ package sample;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class Controller{
 
     @FXML
     public DatePicker pickEndDate;
@@ -277,33 +274,5 @@ public class Controller implements Initializable {
 
         textArea.setText(result.toString());
         result.setLength(0);
-    }
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        pickEndDate.setValue(LocalDate.parse("11.10.2017", formatter));
-        pickStartDate.setValue(LocalDate.parse("18.10.2016", formatter));
-        stayPeriod.setText("177");
-
-        enterDate.setValue(LocalDate.parse("24.01.2017", formatter));
-        exitDate.setValue(LocalDate.now());
-
-
-        LocalDate[] dates = new LocalDate[2];
-
-        dates[0] = LocalDate.parse("21.10.2016", formatter);
-        dates[1] = LocalDate.parse("11.01.2017", formatter);
-
-        dateObject.getEnterExitDate().add(dates);
-
-
-        dates = new LocalDate[2];
-        dates[0] = LocalDate.parse("24.01.2017", formatter);
-        dates[1] = LocalDate.now();
-
-        dateObject.getEnterExitDate().add(dates);
-        updateTextArea();
-
     }
 }
