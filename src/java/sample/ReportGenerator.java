@@ -2,11 +2,13 @@ package sample;
 
 import java.awt.*;
 import java.io.*;
+import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
@@ -33,8 +35,14 @@ class ReportGenerator {
 
     private String getPath() {
         String path = String.valueOf(getClass().getProtectionDomain().getCodeSource().getLocation());
-        path = path.substring(6);
 
+        try {
+            path = URLDecoder.decode(path, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        path = path.substring(6);
         int indexOf1 = path.lastIndexOf("/") + 1;
         path = path.substring(0, indexOf1);
         return path;
@@ -108,7 +116,7 @@ class ReportGenerator {
 
     void saveAndOpenResultFile() {
         List<String> lines = Collections.singletonList(createNewReport().toString());
-        String path = getPath() + "myResult.html";
+        String path = getPath() + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) + ".html";
         Path file = Paths.get(path);
         System.out.println("Save Report File");
         try {
