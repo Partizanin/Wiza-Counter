@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title></head>
+<body>
+<div>
+    <table style="width: 100%" id="resultTable">
+        <tr>
+            <th>Назва</th>
+            <th>Значення</th>
+        </tr>
+        <tr>
+            <td>Кількість днів до кінця візи</td>
+            <td id="1">186</td>
+        </tr>
+        <tr>
+            <td>Кількість днів які ще можеш перебувати в Польщі</td>
+            <td id="2">21</td>
+        </tr>
+        <tr>
+            <td>Кількість днів які провів вдома коли виїжджав</td>
+            <td id="3">87</td>
+        </tr>
+        <tr>
+            <td>Кількість днів які провів в Польщі</td>
+            <td id="4">156</td>
+        </tr>
+        <tr>
+            <td>Дата закінчення візи</td>
+            <td id="5">29.04.2017</td>
+        </tr>
+    </table>
+    <table style="float: left;" id="wizaDataTable">
+        <tr>
+            <th>Віза від</th>
+            <th>Віза до</th>
+            <th>Кількість днів</th>
+        </tr>
+        <tr>
+            <td id="6">2016-10-18</td>
+            <td id="7">2017-10-11</td>
+            <td id="8">177</td>
+        </tr>
+    </table>
+
+    <table class="tbl-content" cellpadding="0" cellspacing="0" style="display: inline-block;" id="enterExitDataTable">
+        <tr>
+            <th>Дата в'їзду</th>
+            <th>Дата виїзду</th>
+            <th>Кількість днів в Полщі</th>
+            <th>Кількість днів в Україні</th>
+        </tr>
+        <tr id="9">
+            <td>21.10.2016</td>
+            <td>11.01.2017</td>
+            <td>82</td>
+            <td>0</td>
+        <tr></tr>
+
+        <td>24.01.2017</td>
+        <td>08.04.2017</td>
+        <td>74</td>
+        <td>13</td>
+        <tr></tr>
+        <td>24.01.2017</td>
+        <td>08.04.2017</td>
+        <td>74</td>
+        <td>13</td>
+        <tr></tr>
+        <td>24.01.2017</td>
+        <td>08.04.2017</td>
+        <td>74</td>
+        <td>13</td>
+        <tr></tr>
+        <td>24.01.2017</td>
+        <td>08.04.2017</td>
+        <td>74</td>
+        <td>13</td>
+        <tr></tr>
+    </table>
+</div>
+</body>
+<style>
+    body {
+        background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+        background: linear-gradient(to right, #25c481, #25b7c4);
+        font-family: 'Roboto', sans-serif;
+    }
+
+    section {
+        margin: 100px;
+    }
+
+    table {
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+
+    #resultTable {
+        margin-bottom: 20px;
+        overflow-x: auto;
+    }
+
+    #enterExitDataTable {
+        margin-left: 389px;
+        position: absolute;
+        height: 260px; /* Just for the demo          */
+        overflow-y: auto; /* Trigger vertical scroll    */
+    }
+
+    div {
+        background-color: transparent;
+        width: 75%;
+        height: auto;
+        position: absolute; /*it can be fixed too*/
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        /*this to solve "the content will not be cut when the window is smaller than the content": */
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        margin: 29px auto auto;
+    }
+
+    th {
+        padding: 20px 15px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+        background-color: rgba(255, 255, 255, 0.3);
+
+        /*background-color: #4CAF50;*/
+        /*color: white;*/
+        /*font-family: "Comic Sans MS", cursive, sans-serif;*/
+    }
+
+    td {
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: 300;
+        font-size: 12px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+    }
+
+    tr:nth-child(2n+1) {
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 20px 15px;
+
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+</style>
+<script>$(window).on("load resize ", function () {
+    var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+    $('.tbl-header').css({'padding-right': scrollWidth});
+}).resize();</script>
+</html>
