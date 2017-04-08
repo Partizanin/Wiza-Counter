@@ -68,46 +68,92 @@
 </div>
 </body>
 <style>
-    #resultTable{
-        margin-bottom: 12px;
-    }
-    #enterExitDataTable {
-        margin-left: 77px;
-    }
-
     body {
-        background-image: url("//resources//wiza.jpg");
+        background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+        background: linear-gradient(to right, #25c481, #25b7c4);
+        font-family: 'Roboto', sans-serif;
     }
 
-    .row2 {
-        text-align: center;
+    section {
+        margin: 100px;
+    }
+
+    table {
+
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+
+    #resultTable{
+        margin-bottom: 20px;
+        overflow-x: auto;
+    }
+
+    #enterExitDataTable {
+        margin-left: 389px;
+        position: absolute;
+        height: 260px; /* Just for the demo          */
+        overflow-y: auto; /* Trigger vertical scroll    */
     }
 
     div {
-        background-color: white;
-        width: 64%;
+        background-color: transparent;
+        width: 75%;
         height: auto;
-
         position: absolute; /*it can be fixed too*/
         left: 0;
         right: 0;
         top: 0;
         bottom: 0;
-        margin: auto;
-
         /*this to solve "the content will not be cut when the window is smaller than the content": */
         max-width: 100%;
         max-height: 100%;
         overflow: auto;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        margin: 29px auto auto;
     }
 
     th {
-        background-color: #4CAF50;
-        color: white;
+        padding: 20px 15px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;
+        background-color: rgba(255, 255, 255, 0.3);
+
+        /*background-color: #4CAF50;*/
+        /*color: white;*/
+        /*font-family: "Comic Sans MS", cursive, sans-serif;*/
     }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2
+    td {
+        padding: 15px;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: 300;
+        font-size: 14px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+    }
+
+    tr:nth-child(2n+1) {
+        background-color: rgba(255, 255, 255, 0.3);
+        padding: 20px 15px;
+
+    }
+
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     }
 </style>
+
 </html>
