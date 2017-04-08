@@ -72,6 +72,7 @@ class ReportGenerator {
     }
 
     private StringBuilder createNewReport() {
+        System.out.println("Generate Report");
         StringBuilder buffer = new StringBuilder(readDefaultReportFile());
 
         int daysToEndOfWiza = buffer.indexOf("id=\"1\">") + 7;
@@ -109,13 +110,14 @@ class ReportGenerator {
         List<String> lines = Collections.singletonList(createNewReport().toString());
         String path = getPath() + "myResult.html";
         Path file = Paths.get(path);
-
+        System.out.println("Save Report File");
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
             Desktop.getDesktop().browse(file.toUri());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Open File");
     }
 
     private String getNumberOfDaysAtHomeValue() {
