@@ -42,7 +42,7 @@ class ReportGenerator {
 
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
-        String path = getPath()+ "result.html";
+        String path = getPath() + "result.html";
 
         BufferedReader in = null;
         try {
@@ -186,12 +186,28 @@ class ReportGenerator {
     private String getEnterExitDateReport() {
         StringBuilder sb = new StringBuilder("");
 
+        /*daysInPoland = exitDate - enterDate*/
+        /*daysAtUkraine = enterDate2 - 1exitDate*/
+        LocalDate exitDate1 = null;
         for (LocalDate[] dates : dateObject.getEnterExitDate()) {
             LocalDate enterDate = dates[0];
             LocalDate exitDate = dates[1];
+
+            int daysInPoland = 0;
+            int daysAtUkraine = 0;
+
+            if (exitDate1 != null) {
+                daysAtUkraine = Integer.parseInt(utils.daysBetweenDate(exitDate1, enterDate));
+            }
+
+            daysInPoland = Integer.parseInt(utils.daysBetweenDate(enterDate, exitDate));
+
             sb.append("<td>").append(enterDate.format(formatter)).append("</td>");
             sb.append("<td>").append(exitDate.format(formatter)).append("</td>");
+            sb.append("<td>").append(daysInPoland).append("</td>");
+            sb.append("<td>").append(daysAtUkraine).append("</td>");
             sb.append("<tr></tr>");
+            exitDate1 = exitDate;
         }
 
         return sb.toString();
