@@ -50,8 +50,9 @@ class ReportGenerator {
 
     private String readDefaultReportFile() {
         StringBuilder buffer = new StringBuilder("");
+        /* ******************************************** */
         String path = getPath()+ "resources/result.html";
-
+        /* **don`t commit this part of cod to master*** */
         BufferedReader in = null;
         try {
             in = new BufferedReader(
