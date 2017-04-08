@@ -12,10 +12,6 @@ import java.time.format.DateTimeFormatter;
  * To change this template use File|Setting|Editor|File and Code Templates.
  */
 public class Utils {
-
-    public static void main(String[] args) {
-        new Utils().daysBetweenDate(LocalDate.parse(""), LocalDate.parse(""));
-    }
     public String daysBetweenDate(LocalDate startDate, LocalDate endDate) {
         long days = Duration.between(startDate.atTime(0, 0), endDate.atTime(0, 0)).toDays();
         return String.valueOf(days);
