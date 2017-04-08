@@ -63,25 +63,56 @@ public class DateObject {
     String addEnterExitDate(LocalDate enterDate, LocalDate exitDate) {
         LocalDate[] dates = new LocalDate[2];
         String result = "Такі дати вже існують";
-        boolean isExist = true;
+        boolean isExist = false;
+        boolean isUncorrected = false;
 
 
         for (LocalDate[] localDates : getEnterExitDate()) {
             if (localDates[0].isEqual(enterDate)) {
                 if (localDates[1].isEqual(exitDate)) {
-                    isExist = false;
+                    isExist = true;
                 }
             }
         }
 
 
-        if (isExist) {
-            dates[0] = enterDate;
-            dates[1] = exitDate;
+/*дата вїздуд не може бути меншою дати останнього виїзду*/
+/*дата виїзду не може бути меншою дати вїзду*/
 
 
-            getEnterExitDate().add(dates);
-            result = "Дати успішно додано!";
+
+        if (!isExist) {
+
+            LocalDate lastExitDate = null;
+            if (getEnterExitDate().size() > 0) {
+                lastExitDate = getEnterExitDate().get(0)[1];
+
+                for (LocalDate[] localDates : getEnterExitDate()) {
+                    if (lastExitDate.isBefore(localDates[1])) {
+                        lastExitDate = localDates[1];
+                    }
+                }
+
+                if (lastExitDate.isAfter(enterDate)) {
+                    isUncorrected = true;
+                    result = "Дата в'їзду не може бути меншою дати останнього виїзду!";
+                }
+            }
+
+
+            if (exitDate.isBefore(enterDate)) {
+                isUncorrected = true;
+                result = "Дата виїзду не може бути меншою дати в'їзду!";
+            }
+
+            if (!isUncorrected) {
+
+                dates[0] = enterDate;
+                dates[1] = exitDate;
+
+                getEnterExitDate().add(dates);
+                result = "Дати успішно додано!";
+            }
         }
 
         return result;
