@@ -131,7 +131,7 @@ public class Controller implements Initializable {
                     updateTextArea();
                     showInfoMessage(addingResult);
                 } else {
-                    showInfoMessage(addingResult);
+                    showErrorMessage(addingResult);
                 }
             }
 
