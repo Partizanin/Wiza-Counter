@@ -116,16 +116,16 @@ class ReportGenerator {
 
     void saveAndOpenResultFile() {
         List<String> lines = Collections.singletonList(createNewReport().toString());
-        String path = getPath() + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) + ".html";
+        String path = getPath() + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH-mm-ss")) + ".html";
         Path file = Paths.get(path);
         System.out.println("Save Report File");
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
+            System.out.println("Open File");
             Desktop.getDesktop().browse(file.toUri());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Open File");
     }
 
     private String getNumberOfDaysAtHomeValue() {
