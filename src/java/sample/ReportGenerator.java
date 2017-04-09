@@ -137,7 +137,7 @@ class ReportGenerator {
 
             for (int i = 0; i < dateObject.getEnterExitDate().size() - 1; i++) {
                 LocalDate exitDateToHome = dateObject.getEnterExitDate().get(i)[1];
-                LocalDate enterDateToPolandAfterHome = dateObject.getEnterExitDate().get(i + 1)[1];
+                LocalDate enterDateToPolandAfterHome = dateObject.getEnterExitDate().get(i + 1)[0];
 
                 tempResult += Integer.parseInt(utils.daysBetweenDate(exitDateToHome, enterDateToPolandAfterHome));
 
