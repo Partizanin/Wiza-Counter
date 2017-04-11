@@ -6,6 +6,7 @@ import sample.Utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+
 /**
  * Created with Intellij IDEA.
  * Project name: DateTimeCounter.
@@ -22,6 +23,26 @@ public class UtilsTest {
     public void setUp() throws Exception {
         utils = new Utils();
         formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    }
+
+    @Test
+    public void parser() throws Exception {
+        LocalDate actual = LocalDate.parse("04/11/2017",formatter);
+        LocalDate expected = LocalDate.parse("05/11/2017",formatter);
+
+        expected = LocalDate.parse(utils.dateValidation("2017-04-11"));
+        Assert.assertTrue(actual.isEqual(expected));
+        expected = LocalDate.parse(utils.dateValidation("11-04-2017"));
+        Assert.assertTrue(actual.isEqual(expected));
+        expected = LocalDate.parse(utils.dateValidation("11.04.2017"));
+        Assert.assertTrue(actual.isEqual(expected));
+        expected = LocalDate.parse(utils.dateValidation("2017.04.11"));
+        Assert.assertTrue(actual.isEqual(expected));
+        expected = LocalDate.parse(utils.dateValidation("2017/04/11"));
+        Assert.assertTrue(actual.isEqual(expected));
+        expected = LocalDate.parse(utils.dateValidation("11/04/2017"));
+        Assert.assertTrue(actual.isEqual(expected));
+
     }
 
     @Test

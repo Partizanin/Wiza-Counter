@@ -9,7 +9,7 @@ import javafx.util.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Controller{
+public class Controller {
 
     @FXML
     public DatePicker pickEndDate;
@@ -139,7 +139,7 @@ public class Controller{
 
             if (!enterDateValidationResult.equals("x") && !exitDateValidationResult.equals("x")) {
 
-                this.enterDate.setValue(this.enterDate.getConverter().fromString(this.enterDate.getEditor().getText()));
+                this.enterDate.setValue(this.enterDate.getConverter().fromString(utils.dateValidation(this.enterDate.getEditor().getText())));
                 exitDate.setValue(exitDate.getConverter().fromString(exitDate.getEditor().getText()));
 
                 LocalDate enterDateValue = this.enterDate.getValue();
@@ -218,7 +218,12 @@ public class Controller{
                     if (stayPeriod.getStyleClass().size() < 3) {
                         stayPeriod.getStyleClass().addAll("redBorder");
                     }
-                    showErrorMessage("Період перебування введене не вірно!");
+                    String errorMessage = "Період перебування введене не вірно!";
+
+                    if (stayPeriod.getText().length() <= 0) {
+                        errorMessage = "Період перебування не введено!";
+                    }
+                    showErrorMessage(errorMessage);
                 }
 
             } else {

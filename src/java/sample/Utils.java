@@ -3,6 +3,7 @@ package sample;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 /**
  * Created with Intellij IDEA.
@@ -17,35 +18,32 @@ public class Utils {
         return String.valueOf(days);
     }
 
-    String dateValidation(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MM.dd.yyyy");
+    public String dateValidation(String date) {
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .appendOptional(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                .appendOptional(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+                .appendOptional(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+                .appendOptional(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+                .appendOptional(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                .toFormatter();
 
         LocalDate resultDate = null;
 
-        String result = "не правильний формат дати.Введіть дату в вигляді 12.12.2012";
+        String result = "не правильний формат дати.Введіть дату в вигляді 13.12.2012";
         boolean isParsed = false;
         try {
-            resultDate = LocalDate.parse(date,formatter);
+            resultDate = LocalDate.parse(date, formatter);
             isParsed = true;
         } catch (Exception ignored) {
 
         }
 
-        if (!isParsed) {
-            try {
-                resultDate =  LocalDate.parse(date,formatter2);
-                isParsed = true;
-            } catch (Exception ignored) {
-
-            }
-        }
-
 
         if (!isParsed) {
             result = "x";
-        }else {
-            result = formatter.format(resultDate);
+        } else {
+            result = resultDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         }
 
         return result;
@@ -54,12 +52,19 @@ public class Utils {
     String numberValidation(String value) {
         String result = "x";
         boolean isParsed = true;
-        try {
-            Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
+
+        if (value.length() > 0) {
+            try {
+                Integer.parseInt(value);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                isParsed = false;
+            }
+        } else {
             isParsed = false;
         }
+
+
         if (isParsed) {
             result = value;
         }
