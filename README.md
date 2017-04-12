@@ -2,6 +2,9 @@
 App count and show detail information by your wiza
 #### Please leave your issues  [here](https://github.com/Partizanin/Wiza-Counter/issues/1), thank you !
 
+##### Last date of release update [11.04.2017](https://github.com/Partizanin/Wiza-Counter/releases/tag/v1.0)
+ 
+
 ![alt tag](https://github.com/Partizanin/Wiza-Counter/raw/master/Wiza-Couner-tutorials.png)
 
 1. **Віза від** - Від якого чилса віза дійсна,зазвичай це дата в лівом верхньому кутку візи з написом `From`
