@@ -1,7 +1,8 @@
 # Wiza-Counter
 App count and show detail information by your wiza
-![alt tag](https://github.com/Partizanin/Wiza-Counter/raw/master/Wiza-Couner-tutorials.png)
+#### Please leave your issues  [here](https://github.com/Partizanin/Wiza-Counter/issues/1), thank you !
 
+![alt tag](https://github.com/Partizanin/Wiza-Counter/raw/master/Wiza-Couner-tutorials.png)
 
 1. **Віза від** - Від якого чилса віза дійсна,зазвичай це дата в лівом верхньому кутку візи з написом `From`
 2. **Віза до** -  До якого чилса віза дійсна,зазвичай це дата в правому верхньому кутку візи з написом `Until`
